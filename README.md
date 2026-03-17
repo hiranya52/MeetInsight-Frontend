@@ -1,8 +1,8 @@
 # 🚀 MeetInsight Frontend
 
-![React](https://img.shields.io/badge/React-Frontend-blue)
-![Angular](https://img.shields.io/badge/Angular-Frontend-red)
-![TailwindCSS](https://img.shields.io/badge/TailwindCSS-Styling-38BDF8)
+![React](https://img.shields.io/badge/React-Frontend-orange)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-blue)
+![SpringBoot](https://img.shields.io/badge/SpringBoot-pink)
 ![License](https://img.shields.io/badge/License-MIT-green)
 
 **MeetInsight Frontend** is a modern and minimal UI for the **Meeting & Interview Feedback Management System**.  
