@@ -1,11 +1,11 @@
 import './App.css'
-import { Dashboard } from './pages/Dashboard';
+import { Analytics } from './pages/Analytics';
 
 function App() {
 
   return (
     <div>
-      <Dashboard/>
+      <Analytics />
     </div>
   );
 }
