@@ -1,6 +1,23 @@
 import { TrendingUp, Users, Target, Award } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card";
-import { BarChart, Bar, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, RadarChart, PolarGrid, PolarAngleAxis, PolarRadiusAxis, Radar,} from "recharts";
+import {
+  LineChart,
+  Line,
+  PieChart,
+  Pie,
+  Cell,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  RadarChart,
+  PolarGrid,
+  PolarAngleAxis,
+  PolarRadiusAxis,
+  Radar,
+} from "recharts";
 
 const kpiCards = [
   { title: "Total Interviews", value: "124", trend: "+12%", icon: Users, color: "bg-primary" },
@@ -75,22 +92,23 @@ export function Analytics() {
 
       {/* Charts Row */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Bar Chart */}
+
+        {/* Line Chart */}
         <Card className="shadow-md">
           <CardHeader>
             <CardTitle>Interview & Hire Trends</CardTitle>
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={monthlyData}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey="month" />
-                <YAxis />
+              <LineChart data={monthlyData}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
+                <XAxis dataKey="month" stroke="#6b5456" />
+                <YAxis stroke="#6b5456" />
                 <Tooltip />
                 <Legend />
-                <Bar dataKey="interviews" fill="#583A3D" name="Interviews" radius={[8, 8, 0, 0]} />
-                <Bar dataKey="hires" fill="#85A290" name="Hires" radius={[8, 8, 0, 0]} />
-              </BarChart>
+                <Line type="monotone" dataKey="interviews" stroke="#583A3D" strokeWidth={3} />
+                <Line type="monotone" dataKey="hires" stroke="#85A290" strokeWidth={3} />
+              </LineChart>
             </ResponsiveContainer>
           </CardContent>
         </Card>
@@ -105,18 +123,15 @@ export function Analytics() {
               <PieChart>
                 <Pie
                   data={departmentData}
-                  dataKey="value"
                   cx="50%"
                   cy="50%"
                   outerRadius={100}
-                  labelLine={false}
-                  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                  label={(props: any) => {
-                    const { name, percent } = props;
-                    return `${name} ${((percent ?? 0) * 100).toFixed(0)}%`;
-                  }}
+                  dataKey="value"
+                  label={({ name, percent }: { name?: string; percent?: number }) =>
+                    `${name ?? ""} ${Math.round((percent ?? 0) * 100)}%`
+                  }
                 >
-                  {departmentData.map((_, index) => (
+                  {departmentData.map((entry, index) => (
                     <Cell key={index} fill={COLORS[index % COLORS.length]} />
                   ))}
                 </Pie>
@@ -138,9 +153,9 @@ export function Analytics() {
               <PolarGrid />
               <PolarAngleAxis dataKey="skill" />
               <PolarRadiusAxis domain={[0, 5]} />
-              <Radar name="John Smith" dataKey="john" stroke="#583A3D" fill="#583A3D" fillOpacity={0.3} />
-              <Radar name="Sarah Johnson" dataKey="sarah" stroke="#85A290" fill="#85A290" fillOpacity={0.3} />
-              <Radar name="Mike Chen" dataKey="mike" stroke="#a8bdb0" fill="#a8bdb0" fillOpacity={0.3} />
+              <Radar name="John" dataKey="john" stroke="#583A3D" fill="#583A3D" fillOpacity={0.3} />
+              <Radar name="Sarah" dataKey="sarah" stroke="#85A290" fill="#85A290" fillOpacity={0.3} />
+              <Radar name="Mike" dataKey="mike" stroke="#a8bdb0" fill="#a8bdb0" fillOpacity={0.3} />
               <Legend />
               <Tooltip />
             </RadarChart>
@@ -155,20 +170,20 @@ export function Analytics() {
         </CardHeader>
         <CardContent>
           <div className="space-y-4">
-            {topCandidates.map((candidate) => (
+            {topCandidates.map((c) => (
               <div
-                key={candidate.rank}
-                className="flex items-center gap-4 p-4 border rounded-lg hover:bg-accent/50 transition-colors"
+                key={c.rank}
+                className="flex items-center gap-4 p-4 border border-border rounded-lg hover:bg-accent/50 transition"
               >
-                <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
-                  <span className="text-white font-semibold">#{candidate.rank}</span>
+                <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-white font-semibold">
+                  #{c.rank}
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-semibold">{candidate.name}</h4>
-                  <p className="text-sm text-muted-foreground">{candidate.position}</p>
+                  <h4 className="font-semibold">{c.name}</h4>
+                  <p className="text-sm text-muted-foreground">{c.position}</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-2xl font-semibold">{candidate.score}</p>
+                  <p className="text-2xl font-semibold">{c.score}</p>
                   <p className="text-xs text-muted-foreground">Overall Score</p>
                 </div>
               </div>
