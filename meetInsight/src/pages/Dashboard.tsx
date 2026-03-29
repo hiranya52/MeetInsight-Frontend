@@ -73,7 +73,7 @@ export function Dashboard() {
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <BarChart data={meetingData}>
+              <BarChart data={meetingData} id="meeting-trends-chart">
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                 <XAxis dataKey="month" stroke="#6b5456" />
                 <YAxis stroke="#6b5456" />
@@ -96,7 +96,7 @@ export function Dashboard() {
           </CardHeader>
           <CardContent>
             <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={ratingData}>
+              <LineChart data={ratingData} id="rating-trends-chart">
                 <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
                 <XAxis dataKey="month" stroke="#6b5456" />
                 <YAxis domain={[0, 5]} stroke="#6b5456" />
