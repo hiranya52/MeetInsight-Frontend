@@ -1,0 +1,11 @@
+@import "./fonts.css";
+@import "./tailwind.css";
+@import "./theme.css";
+@import "tw-animate-css";
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+/* BASE STYLES */
+body {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
+    "Roboto", "Oxygen", "Ubuntu", sans-serif;
+}
